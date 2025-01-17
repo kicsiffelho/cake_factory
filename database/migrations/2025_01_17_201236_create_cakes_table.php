@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->decimal('price', 8, 2);
+            $table->integer('price');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

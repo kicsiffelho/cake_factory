@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cake;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class CakeController extends Controller
@@ -15,15 +15,17 @@ class CakeController extends Controller
      */
     public function index(): View
     {
-        return view('cakes.index');
+        return view('cakes.index', [
+            'cakes' => Cake::all()
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('cakes.create');
     }
 
     /**
@@ -39,10 +41,14 @@ class CakeController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
-            $validated['image_path'] = $imagePath;
+            unset($validated['image']);
+            $cake = new Cake();
+            $cake->user_id = $request->user()->id;
+            $cake->name = $validated['name'];
+            $cake->price = $validated['price'];
+            $cake->image_path = $imagePath;
+            $cake->save();
         }
-
-        $request->user()->cakes()->create($validated);
         return redirect(route('cakes.index'));
     }
 
@@ -57,24 +63,51 @@ class CakeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cake $cake)
+    public function edit(Cake $cake): View
     {
-        //
+        Gate::authorize('update', $cake);
+
+        return view('cakes.edit', [
+            'cake' => $cake
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cake $cake)
+    public function update(Request $request, Cake $cake): RedirectResponse
     {
-        //
+        Gate::authorize('update', $cake);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $cake->name = $validated['name'];
+        $cake->price = $validated['price'];
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            unset($validated['image']);
+            $cake->image_path = $imagePath;
+        }
+
+        $cake->save();
+
+        return redirect(route('cakes.index'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cake $cake)
+    public function destroy(Cake $cake):RedirectResponse
     {
-        //
+        Gate::authorize('delete', $cake);
+
+        $cake->delete();
+
+        return redirect(route('cakes.index'));
     }
 }
