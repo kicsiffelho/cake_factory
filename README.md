@@ -1,4 +1,4 @@
-![Chocolate cake](https://github.com/kicsiffelho/cake_factory/main/public/images/chocolatecake.webp)
+![Chocolate cake](https://github.com/kicsiffelho/cake_factory/blob/main/public/images/chocolatecake.png)
 
 # Cake Factory
 
