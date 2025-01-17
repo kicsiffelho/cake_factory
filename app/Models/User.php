@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cake::class);
     }
+
+    public function feedback(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
+    }
 }

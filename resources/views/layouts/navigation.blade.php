@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('cakes.create')" :active="request()->routeIs('cakes.create')">
                         {{ __('Add cakes') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('feedback.create')" :active="request()->routeIs('feedback.create')">
+                        {{ __('Feedback') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -80,6 +83,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('cakes.create')" :active="request()->routeIs('cakes.create')">
                 {{ __('Add cakes') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('feedback.create')" :active="request()->routeIs('feedback.create')">
+                {{ __('Feedback') }}
             </x-responsive-nav-link>
         </div>
 
