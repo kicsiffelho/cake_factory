@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CakeController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,5 +25,9 @@ Route::resource('cakes', CakeController::class)
 Route::resource('feedback', FeedbackController::class)
     ->only(['index', 'store', 'create', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
+
+Route::resource('orders', OrderController::class)
+->only(['index', 'store', 'create', 'edit', 'update', 'destroy', 'show'])
+->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
