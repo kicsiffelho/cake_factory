@@ -24,7 +24,6 @@ Authentication is handled by Breeze
 
 ## Run
 
-Start the server:
 `php artisan serve`
 
 `npm run dev`
