@@ -36,7 +36,7 @@ Authentication is handled by Breeze
 
 - Order any cake you would like
 
-- If you change your mind you can cancel your order anytime
+- Cancel your order anytime
 
 - Give feedback about the cake
 
