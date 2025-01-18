@@ -9,7 +9,7 @@
             >{{ old('message', $feedback->message) }}</textarea>
             <x-input-error :messages="$errors->get('message')" class="mt-2" />
             <div class="mt-4 space-x-2">
-                <x-primary-button>{{ __('Save') }}</x-primary-button>
+                <button class="bg-black text-white px-4 py-2 rounded-lg">{{ __('Save') }}</button>
                 <a href="{{ route('dashboard') }}">{{ __('Cancel') }}</a>
             </div>
         </form>
