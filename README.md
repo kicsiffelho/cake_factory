@@ -28,6 +28,8 @@ Authentication is handled by Breeze
 
 `npm run dev`
 
+localhost:8000
+
 ## Possibilites
 
 - Add new cakes to our catalogue
